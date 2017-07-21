@@ -1,0 +1,83 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_img_video"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@android:color/black">
+
+    <com.humanheima.videoplayerdemo.ui.widget.video.VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/img_audio"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <com.humanheima.videoplayerdemo.ui.widget.video.VideoController
+        android:id="@+id/videoController"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+        android:id="@+id/vertical_seekbar_wrapper"
+        android:visibility="gone"
+        android:layout_width="30dp"
+        android:layout_height="150dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="48dp"
+        android:layout_marginRight="56dp"
+        android:background="#88000000">
+
+        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+            android:id="@+id/vertical_seekbar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:splitTrack="false"
+            app:seekBarRotation="CW270"
+            android:minHeight="4dp"
+            android:maxHeight="4dp"
+            android:progressDrawable="@drawable/bg_video_seekbar"
+            android:thumb="@drawable/ic_video_thumb"/>
+
+    </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
+    <View
+        android:id="@+id/view_prepared"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"/>
+
+    <ImageView
+        android:id="@+id/img_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:id="@+id/img_live_action"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        app:srcCompat="@drawable/ic_live_action" />
+
+    <RelativeLayout
+        android:id="@+id/rl_video_loading"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="@style/videoLoading" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

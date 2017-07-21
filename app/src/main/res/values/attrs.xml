@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--开关按钮-->
+    <declare-styleable name="SwitchButton">
+        <attr name="selectColor" format="color" />
+        <attr name="normalColor" format="color" />
+        <attr name="buttonColor" format="color" />
+        <attr name="buttonPadding" format="dimension" />
+        <attr name="switchRate" format="integer" />
+    </declare-styleable>
+
+    <!--横向进度条-->
+    <declare-styleable name="HorizontalProgressView">
+        <attr name="horizontalColor" format="color" />
+        <attr name="horizontalProgressColor" format="color" />
+    </declare-styleable>
+
+    <!--图片轮播控件-->
+    <declare-styleable name="Banner">
+        <attr name="delay_time" format="integer" />
+        <attr name="is_auto_play" format="boolean" />
+        <attr name="indicator_width" format="dimension" />
+        <attr name="indicator_height" format="dimension" />
+        <attr name="indicator_margin" format="dimension" />
+        <attr name="indicator_drawable_selected" format="reference" />
+        <attr name="indicator_drawable_unselected" format="reference" />
+    </declare-styleable>
+</resources>

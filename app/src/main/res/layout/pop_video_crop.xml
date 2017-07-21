@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#bb000000">
+
+    <TextView
+        android:id="@+id/dialog_video_crop_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/video_crop_success"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/dialog_video_crop_img"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_placeholder"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="40dp">
+
+            <TextView
+                android:id="@+id/dialog_video_crop_save"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:background="@drawable/bg_video_crop_text"
+                android:text="@string/save"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:id="@+id/dialog_video_crop_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/bg_video_crop_text"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="@string/cancel"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
