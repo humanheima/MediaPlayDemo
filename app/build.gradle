@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.humanheima.videoplayerdemo"
         minSdkVersion 14
-        targetSdkVersion 24
+        targetSdkVersion TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -25,19 +25,21 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    testCompile 'junit:junit:4.12'
     compile project(':ijklib')
+    compile project(':musiclibrary')
     //butterKnife
     apt "com.jakewharton:butterknife-compiler:$rootProject.ext.butterKnifeVersion"
     compile "com.jakewharton:butterknife:$rootProject.ext.butterKnifeVersion"
-    compile 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:0.7.0'
     //retrofit
     compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
     compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofitVersion"
     //RxJava
+    // compile 'com.github.ctiao:DanmakuFlameMaster:0.4.9'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:0.7.0'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'com.github.ctiao:DanmakuFlameMaster:0.5.6'
-   // compile 'com.github.ctiao:DanmakuFlameMaster:0.4.9'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
 }

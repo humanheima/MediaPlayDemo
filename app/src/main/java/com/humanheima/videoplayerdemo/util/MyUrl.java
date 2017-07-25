@@ -8,10 +8,11 @@ import java.util.List;
  */
 public class MyUrl {
     public static List<String> urlList;
+    private static String testVideoUrl = "http://domhttp.kksmg.com/2017/05/09/h264_450k_mp4_7f122c71a65219094da3907cbb01e14f_ncm.mp4";
 
     static {
         urlList = new ArrayList<>();
-        urlList.add("http://domhttp.kksmg.com/2016/11/14/h264_450k_mp4_5400163b4b800604c63c220777e631d9_ncm.mp4");
+        urlList.add(testVideoUrl);
         urlList.add("http://domhttp.kksmg.com/2016/11/14/h264_450k_mp4_4ac875866180b930c2926f21adb1bd20_ncm.mp4");
     }
 

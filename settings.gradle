@@ -1,1 +1,1 @@
-include ':app', ':ijklib'
+include ':app', ':ijklib', ':musiclibrary'
