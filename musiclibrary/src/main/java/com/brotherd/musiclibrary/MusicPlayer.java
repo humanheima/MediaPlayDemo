@@ -3,10 +3,13 @@ package com.brotherd.musiclibrary;
 import android.media.MediaPlayer;
 import android.util.Log;
 
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
  * Created by dumingwei on 2017/7/21.
+ *
  */
 public class MusicPlayer implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener,
         MediaPlayer.OnCompletionListener {
@@ -32,18 +35,31 @@ public class MusicPlayer implements MediaPlayer.OnPreparedListener, MediaPlayer.
         private static final MusicPlayer INSTANCE = new MusicPlayer();
     }
 
-    public void play(String url) {
+    public void playNet(String url) {
         mediaPlayer.reset();
         try {
             mediaPlayer.setDataSource(url);
             mediaPlayer.prepare();
         } catch (IOException e) {
-            Log.e(TAG, "play error:" + e.getMessage());
+            Log.e(TAG, "playNet error:" + e.getMessage());
+        }
+    }
+
+    public void playLocal(String localPath) {
+        mediaPlayer.reset();
+        try {
+            FileInputStream fis = new FileInputStream(localPath);
+            FileDescriptor FD = fis.getFD();
+            mediaPlayer.setDataSource(FD);
+            mediaPlayer.prepare();
+            fis.close();
+        } catch (IOException e) {
+            Log.e(TAG, "playLocal error:" + e.getMessage());
         }
     }
 
     public void stop() {
-        if (mediaPlayer != null) {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
         }
     }

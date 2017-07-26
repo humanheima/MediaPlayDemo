@@ -14,7 +14,6 @@ import com.humanheima.videoplayerdemo.R;
 import java.io.File;
 
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PlayMusicActivity extends AppCompatActivity {
 
@@ -39,36 +38,29 @@ public class PlayMusicActivity extends AppCompatActivity {
         File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DreamItPossible.mp3");
         localPath = file.getPath();
         Log.e(TAG, localPath);
-       /* Log.e(TAG, file.getPath());
-        String[] files = file.list();
-        if (files != null) {
-            for (String file1 : files) {
-                Log.e(TAG, file1);
-            }
-        } else {
-            Log.e(TAG, "files==null");
-        }*/
         musicPlayer = MusicPlayer.getInstance();
     }
 
-    @OnClick({R.id.btn_local, R.id.btn_network, R.id.btn_stop})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_local:
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        musicPlayer.play("http://file.kuyinyun.com/group1/M00/90/B7/rBBGdFPXJNeAM-nhABeMElAM6bY151.mp3");
-                    }
-                }).start();
-                break;
-            case R.id.btn_network:
-                break;
-            case R.id.btn_stop:
-                musicPlayer.stop();
-                break;
-            default:
-                break;
-        }
+    public void playLocal(View view) {
+        final String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/DreamItPossible.mp3";
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                musicPlayer.playLocal(path);
+            }
+        }).start();
+    }
+
+    public void playNet(View view) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                musicPlayer.playNet("http://file.kuyinyun.com/group1/M00/90/B7/rBBGdFPXJNeAM-nhABeMElAM6bY151.mp3");
+            }
+        }).start();
+    }
+
+    public void stopPlay(View view) {
+        musicPlayer.stop();
     }
 }
