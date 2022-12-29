@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import android.view.View;
+import android.view.View.OnClickListener;
 import com.humanheima.videoplayerdemo.R;
 
 import butterknife.ButterKnife;
@@ -17,6 +19,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        findViewById(R.id.btn_test_listen_call).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TestListenCallActivity.launch(MainActivity.this);
+            }
+        });
     }
 
     @OnClick(R.id.btn_start_video_activity)

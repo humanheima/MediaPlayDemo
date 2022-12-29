@@ -25,4 +25,16 @@
         <attr name="indicator_drawable_selected" format="reference" />
         <attr name="indicator_drawable_unselected" format="reference" />
     </declare-styleable>
+
+    <!-- 自定义环形进度条的属性-->
+    <declare-styleable name="RingProgressView">
+        <attr name="ringColor" format="color" />
+        <attr name="ringProgressColor" format="color" />
+        <attr name="ringWidth" format="dimension" />
+        <attr name="rps_text_size" format="dimension" />
+        <attr name="rps_text_color" format="color" />
+        <attr name="currentProgress" format="integer" />
+        <attr name="maxProgress" format="integer" />
+    </declare-styleable>
+
 </resources>

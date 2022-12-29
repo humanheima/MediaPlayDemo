@@ -9,12 +9,18 @@ import android.util.Log;
 import android.view.View;
 
 import com.brotherd.musiclibrary.MusicPlayer;
+import com.brotherd.musiclibrary.MusicPlayer.IPlayCallback;
 import com.humanheima.videoplayerdemo.R;
 
+import com.humanheima.videoplayerdemo.ui.widget.RingProgressView;
 import java.io.File;
 
 import butterknife.ButterKnife;
 
+/**
+ * Created by p_dmweidu on 2022/12/29
+ * Desc: 测试简单的音乐播放功能。
+ */
 public class PlayMusicActivity extends AppCompatActivity {
 
 
@@ -22,6 +28,7 @@ public class PlayMusicActivity extends AppCompatActivity {
     private String localPath;
     private String networkUrl;
     private MusicPlayer musicPlayer;
+    private RingProgressView ringProgressView;
 
     public static void launch(Context context) {
         Intent starter = new Intent(context, PlayMusicActivity.class);
@@ -33,16 +40,51 @@ public class PlayMusicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_music);
         ButterKnife.bind(this);
-        localPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/DreamItPossible.mp3";
+        localPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath()
+                + "/DreamItPossible.mp3";
         Log.e(TAG, localPath);
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "DreamItPossible.mp3");
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
+                "DreamItPossible.mp3");
         localPath = file.getPath();
         Log.e(TAG, localPath);
-        musicPlayer = MusicPlayer.getInstance();
+        ringProgressView = findViewById(R.id.ring_progress_view);
+        musicPlayer = MusicPlayer.getInstance(this);
+        musicPlayer.setPlayCallback(new IPlayCallback() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onPaused() {
+
+            }
+
+            @Override
+            public void onStopped() {
+
+            }
+
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError() {
+
+            }
+
+            @Override
+            public void onProgress(int currentPosition, int duration) {
+                ringProgressView.setProgress(currentPosition, duration);
+            }
+        });
     }
 
     public void playLocal(View view) {
-        final String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/DreamItPossible.mp3";
+        final String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath()
+                + "/DreamItPossible.mp3";
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -55,9 +97,17 @@ public class PlayMusicActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                musicPlayer.playNet("http://file.kuyinyun.com/group1/M00/90/B7/rBBGdFPXJNeAM-nhABeMElAM6bY151.mp3");
+                musicPlayer.playNet("http://mp3.9ku.com/hot/2014/07-16/642431.mp3");
             }
         }).start();
+    }
+
+    public void pause(View view) {
+        musicPlayer.pause();
+    }
+
+    public void resume(View view) {
+        musicPlayer.resume();
     }
 
     public void stopPlay(View view) {

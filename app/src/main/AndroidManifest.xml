@@ -33,6 +33,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.activity.PlayMusicActivity"></activity>
+        <activity android:name=".ui.activity.TestListenCallActivity"></activity>
     </application>
 
 </manifest>
