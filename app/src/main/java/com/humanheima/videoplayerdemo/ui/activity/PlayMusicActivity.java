@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import android.widget.ProgressBar;
 import com.brotherd.musiclibrary.MusicPlayer;
 import com.brotherd.musiclibrary.MusicPlayer.IPlayCallback;
 import com.humanheima.videoplayerdemo.R;
@@ -30,6 +31,8 @@ public class PlayMusicActivity extends AppCompatActivity {
     private MusicPlayer musicPlayer;
     private RingProgressView ringProgressView;
 
+    private ProgressBar progressLoading;
+
     public static void launch(Context context) {
         Intent starter = new Intent(context, PlayMusicActivity.class);
         context.startActivity(starter);
@@ -39,6 +42,7 @@ public class PlayMusicActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_music);
+        progressLoading = findViewById(R.id.progress_loading);
         ButterKnife.bind(this);
         localPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath()
                 + "/DreamItPossible.mp3";
@@ -53,6 +57,20 @@ public class PlayMusicActivity extends AppCompatActivity {
             @Override
             public void onStart() {
 
+            }
+
+            @Override
+            public void onBufferingStart() {
+                if (progressLoading != null) {
+                    progressLoading.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onBufferingEnd() {
+                if (progressLoading != null) {
+                    progressLoading.setVisibility(View.INVISIBLE);
+                }
             }
 
             @Override

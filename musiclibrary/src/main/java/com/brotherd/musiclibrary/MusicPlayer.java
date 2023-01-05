@@ -19,7 +19,7 @@ import java.io.IOException;
  * Created by dumingwei on 2017/7/21.
  */
 public class MusicPlayer implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener,
-        MediaPlayer.OnCompletionListener {
+        MediaPlayer.OnCompletionListener, MediaPlayer.OnInfoListener {
 
     private static final String TAG = "MusicPlayer";
     public MediaPlayer mediaPlayer;
@@ -61,7 +61,7 @@ public class MusicPlayer implements MediaPlayer.OnPreparedListener, MediaPlayer.
         mediaPlayer.setOnPreparedListener(this);
         mediaPlayer.setOnErrorListener(this);
         mediaPlayer.setOnCompletionListener(this);
-
+        mediaPlayer.setOnInfoListener(this);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mAudioFocusChangeListener = new OnAudioFocusChangeListener() {
             @Override
@@ -221,9 +221,35 @@ public class MusicPlayer implements MediaPlayer.OnPreparedListener, MediaPlayer.
         mHandler.removeMessages(WHAT_UPDATE_PROGRESS);
     }
 
+    @Override
+    public boolean onInfo(MediaPlayer mp, int what, int extra) {
+        Log.i(TAG, "onInfo: onInfo");
+        switch (what) {
+            case MediaPlayer.MEDIA_INFO_BUFFERING_START:
+                Log.i(TAG, "onInfo: 开始缓冲");
+                if (playCallback!=null){
+                    playCallback.onBufferingStart();
+                }
+                break;
+            case MediaPlayer.MEDIA_INFO_BUFFERING_END:
+                Log.i(TAG, "onInfo: 结束缓冲");
+                if (playCallback!=null){
+                    playCallback.onBufferingEnd();
+                }
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
+
     public interface IPlayCallback {
 
         void onStart();
+
+        void onBufferingStart();
+        void onBufferingEnd();
 
         void onPaused();
 

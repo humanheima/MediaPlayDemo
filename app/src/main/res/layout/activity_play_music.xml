@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:context=".ui.activity.PlayMusicActivity"
         android:orientation="vertical">
 
 
-    <com.humanheima.videoplayerdemo.ui.widget.RingProgressView
-            android:id="@+id/ring_progress_view"
-            android:layout_width="40dp"
+    <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_marginTop="50dp"
-            app:ringColor="#FFEACE"
-            app:ringProgressColor="#FF6000"
-            app:ringWidth="3dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="40dp" />
+            android:layout_height="wrap_content">
+
+        <ProgressBar
+                android:layout_centerHorizontal="true"
+                android:id="@+id/progress_loading"
+                style="@style/My_Circle_ProgressBar_Large"
+                android:layout_width="40dp"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:layout_height="40dp"
+                android:indeterminate="true" />
+
+        <com.humanheima.videoplayerdemo.ui.widget.RingProgressView
+                android:id="@+id/ring_progress_view"
+                android:layout_width="40dp"
+                app:ringColor="#FFEACE"
+                android:layout_centerHorizontal="true"
+                app:ringProgressColor="#FF6000"
+                app:ringWidth="3dp"
+                android:layout_height="40dp" />
+
+    </RelativeLayout>
+
 
     <Button
             android:layout_marginTop="20dp"
