@@ -13,7 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import com.humanheima.videoplayerdemo.R;
 import com.humanheima.videoplayerdemo.ui.base.BaseVideoActivity;
 import com.humanheima.videoplayerdemo.ui.widget.dialog.PromptDialog;
@@ -21,15 +20,10 @@ import com.humanheima.videoplayerdemo.util.Debug;
 import com.humanheima.videoplayerdemo.util.NetWorkUtil;
 import com.humanheima.videoplayerdemo.util.SpUtil;
 import com.humanheima.videoplayerdemo.util.ToastUtil;
-
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by chenchao on 16/10/18.
@@ -46,35 +40,20 @@ public class VideoController extends RelativeLayout implements Handler.Callback 
     //隐藏控制条
     private final int FADE_OUT = 1;
 
-    @BindView(R.id.rl_parent)
     RelativeLayout rlParent;
-    @BindView(R.id.text_video_title)
     TextView textTitle;
-    @BindView(R.id.ll_top_bar)
     LinearLayout llTopBar;
-    @BindView(R.id.img_play_pause)
     ImageView imgPlayPause;
-    @BindView(R.id.img_full_small)
     ImageView imgFullSmall;
-    @BindView(R.id.img_volume)
     ImageView imgVolume;
-    @BindView(R.id.text_totalTime)
     TextView textTotalTime;
-    @BindView(R.id.text_currentTime)
     TextView textCurrentTime;
-    @BindView(R.id.seekbar)
     SeekBar seekbar;
-    @BindView(R.id.rl_bottom_bar)
     RelativeLayout rlBottomBar;
-    @BindView(R.id.img_lock)
     ImageView imgLock;
-    @BindView(R.id.img_crop)
     ImageView imgCrop;
-    @BindView(R.id.img_video_share)
     ImageView imgShare;
-    @BindView(R.id.ll_share_crop)
     LinearLayout llShareCrop;
-    @BindView(R.id.video_controller_progress)
     ProgressBar progressBar;
 
     private View rootView;
@@ -150,7 +129,6 @@ public class VideoController extends RelativeLayout implements Handler.Callback 
 
     private void initView() {
         rootView = LayoutInflater.from(getContext()).inflate(R.layout.video_controller, null);
-        ButterKnife.bind(this, rootView);
         addView(rootView);
 
         handler = new Handler(this);
@@ -222,7 +200,6 @@ public class VideoController extends RelativeLayout implements Handler.Callback 
         }
     }
 
-    @OnClick(R.id.img_play_pause)
     public void setVideoPlayOrPause() {
         if (videoView == null) {
             return;
@@ -247,7 +224,8 @@ public class VideoController extends RelativeLayout implements Handler.Callback 
             } else if (!NetWorkUtil.isWifi(baseVideoActivity)) {
                 //流量不能播放
                 if (!SpUtil.getInstance().getAllowMoblie()) {
-                    ToastUtil.Infotoast(baseVideoActivity, getResources().getString(R.string.video_play_not_wifi_prompt));
+                    ToastUtil.Infotoast(baseVideoActivity,
+                            getResources().getString(R.string.video_play_not_wifi_prompt));
                     return;
                 } else if (showPlayPrompt) {
                     //流量播放提示
@@ -286,7 +264,8 @@ public class VideoController extends RelativeLayout implements Handler.Callback 
 
     private void showPrompt(final int seekTo) {
         if (promptDialog == null) {
-            promptDialog = PromptDialog.show(baseVideoActivity, getResources().getString(R.string.video_play_not_wifi_title)
+            promptDialog = PromptDialog.show(baseVideoActivity,
+                    getResources().getString(R.string.video_play_not_wifi_title)
                     , getResources().getString(R.string.video_play_not_wifi_content)
                     , getResources().getString(R.string.video_play_not_wifi_continue));
             promptDialog.setCancelListener(new OnClickListener() {
@@ -322,7 +301,6 @@ public class VideoController extends RelativeLayout implements Handler.Callback 
     /**
      * 显示隐藏控制条
      */
-    @OnClick(R.id.rl_parent)
     public void showOrHideController() {
         handler.removeMessages(FADE_OUT);
         if (isLock) {
@@ -349,7 +327,6 @@ public class VideoController extends RelativeLayout implements Handler.Callback 
     /**
      * 顶部返回按钮
      */
-    @OnClick(R.id.img_video_back)
     public void onBack() {
         baseVideoActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
@@ -357,7 +334,6 @@ public class VideoController extends RelativeLayout implements Handler.Callback 
     /**
      * 全屏和取消全屏
      */
-    @OnClick(R.id.img_full_small)
     public void setFullOrSmall() {
         Debug.d(TAG, "放大缩小:" + baseVideoActivity.isFullScreen());
         if (baseVideoActivity.isFullScreen()) {
@@ -370,7 +346,6 @@ public class VideoController extends RelativeLayout implements Handler.Callback 
     /**
      * 设置锁屏与取消锁屏
      */
-    @OnClick(R.id.img_lock)
     public void setLock() {
         if (isLock) {
             imgLock.setImageResource(R.drawable.ic_video_lock_no);
@@ -484,6 +459,7 @@ public class VideoController extends RelativeLayout implements Handler.Callback 
      * 定时器任务用来更新播放进度条的进度
      */
     private class MyTimerTask extends TimerTask {
+
         @Override
         public void run() {
             handler.post(new Runnable() {
@@ -493,11 +469,15 @@ public class VideoController extends RelativeLayout implements Handler.Callback 
                         int current = videoView.getCurrentPosition();
                         int duration = videoView.getDuration();
                         if (duration >= 3600 * 1000) {
-                            textCurrentTime.setText(hmsDateFormat.format(current - TimeZone.getDefault().getRawOffset()));
-                            textTotalTime.setText("/".concat(hmsDateFormat.format(duration - TimeZone.getDefault().getRawOffset())));
+                            textCurrentTime.setText(
+                                    hmsDateFormat.format(current - TimeZone.getDefault().getRawOffset()));
+                            textTotalTime.setText(
+                                    "/".concat(hmsDateFormat.format(duration - TimeZone.getDefault().getRawOffset())));
                         } else {
-                            textCurrentTime.setText(msDateFormat.format(current - TimeZone.getDefault().getRawOffset()));
-                            textTotalTime.setText("/".concat(msDateFormat.format(duration - TimeZone.getDefault().getRawOffset())));
+                            textCurrentTime.setText(
+                                    msDateFormat.format(current - TimeZone.getDefault().getRawOffset()));
+                            textTotalTime.setText(
+                                    "/".concat(msDateFormat.format(duration - TimeZone.getDefault().getRawOffset())));
                         }
                         if (current <= duration && duration > 0) {
                             seekbar.setProgress(current * SEEK_MAX / duration);
@@ -508,7 +488,8 @@ public class VideoController extends RelativeLayout implements Handler.Callback 
                         }
                         int progressInt = seekbar.getProgress() / 10;
                         //设置缓存进度
-                        if (buffer <= videoView.getBufferPercentage() && buffer < 100 && videoView.getBufferPercentage() > progressInt) {
+                        if (buffer <= videoView.getBufferPercentage() && buffer < 100
+                                && videoView.getBufferPercentage() > progressInt) {
                             buffer = videoView.getBufferPercentage();
                         } else if (buffer < 100) {
                             buffer = seekbar.getProgress() / 10 + 1;
@@ -560,6 +541,7 @@ public class VideoController extends RelativeLayout implements Handler.Callback 
 
 
     public interface ShowAndHideControllerListener {
+
         void hide();
 
         void showVolume();

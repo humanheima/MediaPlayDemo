@@ -1,20 +1,17 @@
 package com.humanheima.videoplayerdemo.ui.base;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.humanheima.videoplayerdemo.R;
 import com.humanheima.videoplayerdemo.ui.widget.dialog.LoadingDialog;
 import com.humanheima.videoplayerdemo.util.NetWorkUtil;
 import com.humanheima.videoplayerdemo.util.ScreenUtil;
 import com.humanheima.videoplayerdemo.util.ToastUtil;
-
-import butterknife.ButterKnife;
 
 /**
  * Created by chenchao on 16/9/27.
@@ -80,13 +77,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(bindLayout());
         screenWidth = ScreenUtil.width(this).px;
         screenHeight = ScreenUtil.height(this).px;
-        ButterKnife.bind(this);
         initData();
         bindEvent();
     }
 
     /**
      * 设置是否右滑关闭
+     *
      * @param openFlingClose
      */
     public void setOpenFlingClose(boolean openFlingClose) {

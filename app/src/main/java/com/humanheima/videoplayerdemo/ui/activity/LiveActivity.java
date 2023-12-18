@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-
 import com.humanheima.videoplayerdemo.R;
 import com.humanheima.videoplayerdemo.model.LiveAll;
 import com.humanheima.videoplayerdemo.model.LiveDetail;
@@ -25,15 +24,11 @@ import com.humanheima.videoplayerdemo.util.ListUtil;
 import com.humanheima.videoplayerdemo.util.NetWorkUtil;
 import com.humanheima.videoplayerdemo.util.ScreenUtil;
 import com.humanheima.videoplayerdemo.util.ToastUtil;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 import master.flame.danmaku.controller.DrawHandler;
 import master.flame.danmaku.danmaku.model.BaseDanmaku;
 import master.flame.danmaku.danmaku.model.Danmaku;
@@ -54,22 +49,16 @@ import rx.schedulers.Schedulers;
 public class LiveActivity extends BaseVideoActivity {
 
     private final String TAG = "LiveActivity";
-    @BindView(R.id.img_audio)
     ImageView imgAudio;
-    @BindView(R.id.progressbar)
     ProgressBar progressbar;
-    @BindView(R.id.img_volume_bg)
     ImageView imgVolumeBg;
-    @BindView(R.id.send)
     Button send;
-    @BindView(R.id.send_img_text)
     Button sendImgText;
     private List<LiveAll.LiveBean> liveBeans;
     private List<LiveDetail> liveDetails;
     private List<LiveDetail> liveDetailsTemp;
     private Subscriber subscriber;
     //关于弹幕的
-    @BindView(R.id.danmaku_view)
     DanmakuView danmakuView;
     private boolean showDanmaku;
     private DanmakuContext danmakuContext;
@@ -307,7 +296,8 @@ public class LiveActivity extends BaseVideoActivity {
         ImageSpan span = new ImageSpan(drawable);
         spannableStringBuilder.setSpan(span, 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableStringBuilder.append("图文混编");
-        spannableStringBuilder.setSpan(new BackgroundColorSpan(Color.parseColor("#ff3344")), text.length(), spannableStringBuilder.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.setSpan(new BackgroundColorSpan(Color.parseColor("#ff3344")), text.length(),
+                spannableStringBuilder.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         return spannableStringBuilder;
     }
 
@@ -339,8 +329,6 @@ public class LiveActivity extends BaseVideoActivity {
         }
     }
 
-
-    @OnClick({R.id.send, R.id.send_img_text})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.send:

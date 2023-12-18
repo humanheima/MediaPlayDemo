@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.humanheima.videoplayerdemo">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -34,6 +33,13 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ui.activity.PlayMusicActivity"></activity>
         <activity android:name=".ui.activity.TestListenCallActivity"></activity>
+        <activity android:name=".ui.activity.TestMediaSessionActivity"></activity>
+
+        <service android:name=".ui.activity.MusicService">
+            <intent-filter>
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

@@ -6,6 +6,12 @@
         android:layout_height="match_parent">
 
     <Button
+            android:id="@+id/btn_test_media_session"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="测试MediaSession 暂停播放" />
+
+    <Button
             android:id="@+id/btn_test_listen_call"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

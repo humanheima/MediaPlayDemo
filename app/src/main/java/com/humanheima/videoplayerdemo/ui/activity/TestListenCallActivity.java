@@ -6,13 +6,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import butterknife.ButterKnife;
+import androidx.appcompat.app.AppCompatActivity;
 import com.humanheima.videoplayerdemo.MyPhoneCallListener;
 import com.humanheima.videoplayerdemo.R;
 import java.text.DateFormat;
@@ -54,7 +53,6 @@ public class TestListenCallActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_listen_call);
-        ButterKnife.bind(this);
         telephony();
         Log.e(TAG, "onCreate: now elapsedRealtime = " + format.format(SystemClock.elapsedRealtime()));
         Log.e(TAG, "onCreate: now uptimeMillis = " + format.format(SystemClock.uptimeMillis()));

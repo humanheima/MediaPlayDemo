@@ -4,19 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-
 import android.widget.ProgressBar;
+import androidx.appcompat.app.AppCompatActivity;
 import com.brotherd.musiclibrary.MusicPlayer;
 import com.brotherd.musiclibrary.MusicPlayer.IPlayCallback;
 import com.humanheima.videoplayerdemo.R;
-
 import com.humanheima.videoplayerdemo.ui.widget.RingProgressView;
 import java.io.File;
-
-import butterknife.ButterKnife;
 
 /**
  * Created by p_dmweidu on 2022/12/29
@@ -43,7 +39,6 @@ public class PlayMusicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_music);
         progressLoading = findViewById(R.id.progress_loading);
-        ButterKnife.bind(this);
         localPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath()
                 + "/DreamItPossible.mp3";
         Log.e(TAG, localPath);

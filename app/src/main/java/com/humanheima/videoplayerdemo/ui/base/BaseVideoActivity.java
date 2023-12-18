@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-
 import com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar;
 import com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper;
 import com.humanheima.videoplayerdemo.R;
@@ -36,8 +35,6 @@ import com.humanheima.videoplayerdemo.util.ImageUtil;
 import com.humanheima.videoplayerdemo.util.NetWorkUtil;
 import com.humanheima.videoplayerdemo.util.SpUtil;
 import com.humanheima.videoplayerdemo.util.ToastUtil;
-
-import butterknife.BindView;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -56,30 +53,19 @@ public abstract class BaseVideoActivity extends BaseActivity implements IMediaPl
 
     private final String TAG = "BaseVideoActivity";
 
-    @BindView(R.id.videoView)
     VideoView videoView;
-    @BindView(R.id.videoController)
     public VideoController videoController;
-    @BindView(R.id.rl_video_loading)
     public RelativeLayout rlVideoLoading;
-    @BindView(R.id.rl_img_video)
     public RelativeLayout rlImgVideo;
-    @BindView(R.id.img_video)
     public ImageView imgVideo;
-    @BindView(R.id.img_live_action)
     public ImageView imgLiveAction;
-    @BindView(R.id.view_prepared)
     public View viewPrepared;
 
-    @BindView(R.id.vertical_seekbar_wrapper)
     VerticalSeekBarWrapper verticalSeekBarWrapper;
-    @BindView(R.id.vertical_seekbar)
     VerticalSeekBar verticalSeekBar;
 
     //音量
-    @BindView(R.id.rl_volume_controller)
     RelativeLayout rlVolumeController;
-    @BindView(R.id.progress_volume)
     HorizontalProgressView horizontalProgressView;
 
     //监听网络变化
@@ -145,7 +131,8 @@ public abstract class BaseVideoActivity extends BaseActivity implements IMediaPl
             if (width > height) {
                 setOpenFlingClose(false);
                 isFullScreen = true;
-                rlImgVideo.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, screenWidth));
+                rlImgVideo.setLayoutParams(
+                        new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, screenWidth));
                 videoView.setmRootViewHeight(screenWidth);
                 videoView.setVideoLayout(VideoView.VIDEO_LAYOUT_STRETCH);
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -434,7 +421,7 @@ public abstract class BaseVideoActivity extends BaseActivity implements IMediaPl
     /**
      * 播放视频
      *
-     * @param url         视频地址
+     * @param url 视频地址
      * @param isStopVideo 播放前是否销毁当前视频
      */
     protected void startVideoPlay(String url, boolean isStopVideo) {
@@ -525,14 +512,15 @@ public abstract class BaseVideoActivity extends BaseActivity implements IMediaPl
             rootView.findViewById(R.id.dialog_video_crop_save).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtil.Infotoast(BaseVideoActivity.this, getResources().getString(R.string.video_crop_save_loading));
+                    ToastUtil.Infotoast(BaseVideoActivity.this,
+                            getResources().getString(R.string.video_crop_save_loading));
                     Observable.create(new Observable.OnSubscribe<Bitmap>() {
-                        @Override
-                        public void call(Subscriber<? super Bitmap> subscriber) {
-                            subscriber.onNext(cropBitmap);
-                            subscriber.onCompleted();
-                        }
-                    }).subscribeOn(AndroidSchedulers.mainThread())
+                                @Override
+                                public void call(Subscriber<? super Bitmap> subscriber) {
+                                    subscriber.onNext(cropBitmap);
+                                    subscriber.onCompleted();
+                                }
+                            }).subscribeOn(AndroidSchedulers.mainThread())
                             .observeOn(Schedulers.io())
                             .map(new Func1<Bitmap, String>() {
                                 @Override
@@ -545,16 +533,19 @@ public abstract class BaseVideoActivity extends BaseActivity implements IMediaPl
                                 @Override
                                 public void call(String path) {
                                     if (TextUtils.isEmpty(path)) {
-                                        ToastUtil.Infotoast(BaseVideoActivity.this, getResources().getString(R.string.video_crop_save_failure));
+                                        ToastUtil.Infotoast(BaseVideoActivity.this,
+                                                getResources().getString(R.string.video_crop_save_failure));
                                     } else {
-                                        ToastUtil.Infotoast(BaseVideoActivity.this, getResources().getString(R.string.video_crop_save_success)
-                                                .concat(path));
+                                        ToastUtil.Infotoast(BaseVideoActivity.this,
+                                                getResources().getString(R.string.video_crop_save_success)
+                                                        .concat(path));
                                     }
                                 }
                             }, new Action1<Throwable>() {
                                 @Override
                                 public void call(Throwable throwable) {
-                                    ToastUtil.Infotoast(BaseVideoActivity.this, getResources().getString(R.string.video_crop_save_failure));
+                                    ToastUtil.Infotoast(BaseVideoActivity.this,
+                                            getResources().getString(R.string.video_crop_save_failure));
                                 }
                             });
                 }
@@ -670,6 +661,7 @@ public abstract class BaseVideoActivity extends BaseActivity implements IMediaPl
      * 直播、点播横屏播放的时候监听手势变化 控制音量、亮度和（点播）播放的快进、快退
      */
     class VideoPlayGestureListener extends GestureDetector.SimpleOnGestureListener {
+
         private float fx;
         private float fy;
         private float halfScreenWidth;
@@ -741,18 +733,20 @@ public abstract class BaseVideoActivity extends BaseActivity implements IMediaPl
     protected void onVolumeSlide(float percent) {
         if (nowVolume == -1) {
             nowVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-            if (nowVolume < 0)
+            if (nowVolume < 0) {
                 nowVolume = 0;
+            }
 
             handler.removeMessages(0);
             rlVolumeController.setVisibility(View.VISIBLE);
         }
 
         int index = (int) (percent * maxVolume) + nowVolume;
-        if (index > maxVolume)
+        if (index > maxVolume) {
             index = maxVolume;
-        else if (index < 0)
+        } else if (index < 0) {
             index = 0;
+        }
 
         // 变更声音
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, index, 0);
