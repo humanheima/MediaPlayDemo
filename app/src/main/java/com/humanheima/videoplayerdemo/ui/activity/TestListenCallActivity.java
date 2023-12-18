@@ -84,6 +84,7 @@ public class TestListenCallActivity extends AppCompatActivity {
 
         if (tm != null) {
             try {
+                Log.i(TAG, "telephony: 监听来电");
                 MyPhoneCallListener myPhoneCallListener = new MyPhoneCallListener();
                 myPhoneCallListener.setCallListener(new MyPhoneCallListener.CallListener() {
                     @Override
